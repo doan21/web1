@@ -1,7 +1,10 @@
-*{
+*{ 	
 	margin: 0;
 	padding: 0;
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Poppins', sans-serif; /* Changed font family to Poppins */
+	font-weight: 400; /* Added font weight for better readability */
+	font-size: 16px; /* Added font size for better consistency */
+	line-height: 1.5; /* Added line height for better readability */
 	box-sizing: border-box;
 }
 :root{
