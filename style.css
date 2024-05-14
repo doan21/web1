@@ -97,6 +97,7 @@ nav ul li a:hover::after{
 .header-text h1 span{
 	font-size:60px;
 	color: #ff004f;
+	font-weight: bold;
 	
 }
 
