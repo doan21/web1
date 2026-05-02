@@ -85,22 +85,19 @@
 		    <div>
 			    <i class="fa-solid fa-code"></i>
 			    <h2>Web Design</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+				
 				<a href="#">Learn more</a>
 			</div>
 			<div>
 			    <i class="fa-solid fa-display"></i></i>
 			    <h2>UI/UX Design</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+				
 				<a href="#">Learn more</a>
 			</div>
 			<div>
 			    <i class="fa-brands fa-app-store"></i></i>
 			    <h2>App Design</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
+				
 				<a href="#">Learn more</a>
 			</div>
 		</div>
@@ -219,6 +216,198 @@
 		}
 	}
 
+</script>
+<div id="chat-widget">
+  <div id="chat-window">
+    <div id="chat-header">
+      <span>💬 Chat with Doan</span>
+      <span id="chat-close">✕</span>
+    </div>
+    <div id="chat-messages">
+      <div class="chat-msg bot-bubble">Hey! I'm Doan's assistant. Ask me anything 👋</div>
+    </div>
+    <div id="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Type a message..." />
+      <button id="chat-send">➤</button>
+    </div>
+  </div>
+  <div id="chat-toggle">💬</div>
+</div>
+
+<style>
+  #chat-widget {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+  }
+  #chat-toggle {
+    width: 56px;
+    height: 56px;
+    background: #ff004f;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255,0,79,0.5);
+    margin-left: auto;
+    transition: transform 0.3s;
+  }
+  #chat-toggle:hover { transform: scale(1.1); }
+  #chat-window {
+    display: none;
+    flex-direction: column;
+    width: 320px;
+    height: 420px;
+    background: #1a1a1a;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    margin-bottom: 12px;
+    border: 1px solid #333;
+  }
+  #chat-window.open { display: flex; }
+  #chat-header {
+    background: #ff004f;
+    padding: 14px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  #chat-close { cursor: pointer; font-size: 16px; opacity: 0.8; }
+  #chat-close:hover { opacity: 1; }
+  #chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  #chat-messages::-webkit-scrollbar { width: 4px; }
+  #chat-messages::-webkit-scrollbar-thumb { background: #444; border-radius: 4px; }
+  .chat-msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #fff;
+  }
+  .bot-bubble {
+    background: #2a2a2a;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+  }
+  .user-bubble {
+    background: #ff004f;
+    align-self: flex-end;
+    border-bottom-right-radius: 4px;
+  }
+  .typing-bubble {
+    background: #2a2a2a;
+    align-self: flex-start;
+    border-bottom-left-radius: 4px;
+    color: #aaa;
+    font-style: italic;
+  }
+  #chat-input-area {
+    display: flex;
+    padding: 12px;
+    gap: 8px;
+    border-top: 1px solid #2a2a2a;
+    background: #111;
+  }
+  #chat-input {
+    flex: 1;
+    background: #2a2a2a;
+    border: none;
+    outline: none;
+    padding: 10px 14px;
+    border-radius: 20px;
+    color: #fff;
+    font-size: 13px;
+    font-family: 'Poppins', sans-serif;
+  }
+  #chat-send {
+    background: #ff004f;
+    border: none;
+    color: #fff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+    flex-shrink: 0;
+  }
+  #chat-send:hover { background: #cc003f; }
+</style>
+
+<script>
+  const chatToggle = document.getElementById('chat-toggle');
+  const chatWindow = document.getElementById('chat-window');
+  const chatClose  = document.getElementById('chat-close');
+  const chatInput  = document.getElementById('chat-input');
+  const chatSend   = document.getElementById('chat-send');
+  const chatMessages = document.getElementById('chat-messages');
+
+  chatToggle.onclick = () => chatWindow.classList.toggle('open');
+  chatClose.onclick  = () => chatWindow.classList.remove('open');
+
+  function appendMsg(text, type) {
+    const div = document.createElement('div');
+    div.className = 'chat-msg ' + type;
+    div.textContent = text;
+    chatMessages.appendChild(div);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    return div;
+  }
+
+  async function sendMessage() {
+    const msg = chatInput.value.trim();
+    if (!msg) return;
+    appendMsg(msg, 'user-bubble');
+    chatInput.value = '';
+
+    const typing = appendMsg('Typing...', 'typing-bubble');
+
+    try {
+      const res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': 'YOUR_API_KEY_HERE',
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-calls': 'true'
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 300,
+          system: "You are a friendly assistant on Doan's portfolio website. Doan is a computing student at VJC who knows Python, HTML, CSS, web development, and app design. Answer questions about Doan or general tech questions briefly and helpfully.",
+          messages: [{ role: 'user', content: msg }]
+        })
+      });
+      const data = await res.json();
+      typing.remove();
+      appendMsg(data.content[0].text, 'bot-bubble');
+    } catch(e) {
+      typing.remove();
+      appendMsg('Oops, something went wrong!', 'bot-bubble');
+    }
+  }
+
+  chatSend.onclick = sendMessage;
+  chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendMessage(); });
 </script>
 </body>
 </html>
