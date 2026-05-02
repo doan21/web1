@@ -382,24 +382,28 @@
     const typing = appendMsg('Typing...', 'typing-bubble');
 
     try {
-      const res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-api-key': 'YOUR_API_KEY_HERE',
-          'anthropic-version': '2023-06-01',
-          'anthropic-dangerous-direct-browser-calls': 'true'
-        },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-6',
-          max_tokens: 300,
-          system: "You are a friendly assistant on Doan's portfolio website. Doan is a computing student at VJC who knows Python, HTML, CSS, web development, and app design. Answer questions about Doan or general tech questions briefly and helpfully.",
-          messages: [{ role: 'user', content: msg }]
-        })
-      });
+      const res = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer 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', // Get your free key at openrouter.ai
+  },
+  body: JSON.stringify({
+    // Use the specific ":free" identifier for the free version
+    model: 'meta-llama/llama-3.3-70b-instruct:free', 
+    max_tokens: 300,
+    messages: [
+      { 
+        role: 'system', 
+        content: "You are a friendly assistant on Doan's portfolio website. Doan is a computing student at VJC who knows Python, HTML, CSS, web development, and app design. Answer questions about Doan or general tech questions briefly and helpfully." 
+      },
+      { role: 'user', content: msg }
+    ]
+  })
+});
       const data = await res.json();
       typing.remove();
-      appendMsg(data.content[0].text, 'bot-bubble');
+      appendMsg(data.choices[0].message.content, 'bot-bubble');
     } catch(e) {
       typing.remove();
       appendMsg('Oops, something went wrong!', 'bot-bubble');
