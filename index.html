@@ -156,7 +156,10 @@
 				    <input type="text" name="Name" placeholder="Your Name" required>
 					<input type="email" name="Email" placeholder="Your Email" required>
 					<textarea name="Message" rows="6" placeholder="Your Message"></textarea>
-					<button type="submit" class="btn btn2">Submit</button>
+          <button type="submit" class="btn btn2" id="submitBtn">
+            <span class="btn-text">Submit</span>
+            <span class="btn-loader"></span>
+          </button>
 				</form>
 				<span id="msg"></span>
 			</div>
@@ -189,32 +192,48 @@
 </script>
 <script>
   const scriptURL = 'https://script.google.com/macros/s/AKfycbz-mHkJ_zlJFteAmMfoIjvdfuHoakaYyoJV7KcUQpmF0LsWnBjA8hXOpZBGqhKTfyTyZA/exec'
-  const form = document.forms['submit-to-google-sheet']
-  const msg = document.getElementById("msg")
+const form = document.forms['submit-to-google-sheet']
+const msg = document.getElementById("msg")
+const btn = document.getElementById("submitBtn")
 
-  form.addEventListener('submit', e => {
-    e.preventDefault()
-    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-      .then(response => {
-		msg.innerHTML = "Message sent successfully!"
-		setTimeout(function(){
-			msg.innerHTML = ""
-		}, 1500)
-		form.reset()
-	  })
-      .catch(error => console.error('Error!', error.message))
-  })
-</script>
-<script>
-	var icon = document.getElementById("icon");
-	icon.onclick = function(){
-		document.body.classList.toggle("light-theme");
-		if (document.body.classList.contains("light-theme")){
-			icon.src = "images/moon.png";
-		}else{
-			icon.src = "images/sun.png";
-		}
-	}
+form.addEventListener('submit', e => {
+  e.preventDefault()
+
+  // 🔄 Loading state
+  btn.classList.add("loading")
+  btn.disabled = true
+
+  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+    .then(response => {
+      btn.classList.remove("loading")
+      btn.classList.add("success")
+      btn.innerHTML = "✓ Sent"
+
+      msg.innerHTML = "Message sent successfully!"
+
+      setTimeout(() => {
+        btn.classList.remove("success")
+        btn.innerHTML = '<span class="btn-text">Submit</span><span class="btn-loader"></span>'
+        btn.disabled = false
+        msg.innerHTML = ""
+      }, 2000)
+
+      form.reset()
+    })
+    .catch(error => {
+      btn.classList.remove("loading")
+      btn.classList.add("error")
+      btn.innerHTML = "✕ Error"
+
+      setTimeout(() => {
+        btn.classList.remove("error")
+        btn.innerHTML = '<span class="btn-text">Submit</span><span class="btn-loader"></span>'
+        btn.disabled = false
+      }, 2000)
+
+      console.error('Error!', error.message)
+    })
+})
 
 </script>
 <div id="chat-widget">

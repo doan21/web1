@@ -378,3 +378,42 @@ form btn2{
 	margin-top: -20px;
 	display: block;
 }
+#submitBtn {
+  position: relative;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+#submitBtn.loading .btn-text {
+  visibility: hidden;
+}
+
+#submitBtn.loading .btn-loader {
+  display: inline-block;
+}
+
+.btn-loader {
+  display: none;
+  width: 18px;
+  height: 18px;
+  border: 3px solid white;
+  border-top: 3px solid transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+#submitBtn.success {
+  background: #28a745;
+}
+
+#submitBtn.error {
+  background: #dc3545;
+}
