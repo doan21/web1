@@ -31,7 +31,7 @@ nav ul{
 body{
 	background: var(--primary-color);
 	color: var(--secondary-color);
-	
+	transition: background 0.4s ease, color 0.4s ease;
 }
 #header{
 	width: 100%;
@@ -352,6 +352,12 @@ form input, form textarea{
 	color: #fff;
 	font-size: 18px;
 	border-radius: 6px;
+}
+.light-theme form input,
+.light-theme form textarea {
+    background: #f0f0f0;
+    color: #171212;
+    border: 1px solid #ccc;
 }
 form btn2{
 	padding: 14px 60px;
