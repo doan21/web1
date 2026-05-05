@@ -12,30 +12,39 @@ CORS(app)
 def chat():
     user_message = request.json.get('message')
 
-    response = requests.post(
-        'https://openrouter.ai/api/v1/chat/completions',
-        headers={
-            'Authorization': f'Bearer {os.getenv("OPENROUTER_API_KEY")}',
-            'Content-Type': 'application/json'
-        },
-        json={
-            'model': 'openrouter/free',
-            'max_tokens': 300,
-            'messages': [
-                {
-                    'role': 'system',
-                    'content': "You are a friendly assistant on Doan's portfolio website. Doan is a computing student at VJC who knows Python, HTML, CSS, web development, and app design. Doan's contact: congdoanofs@gmail.com. Answer questions about Doan or general tech questions briefly and helpfully. Summarise your answer so it is 3-4 sentences. Do not give too long explanations."
+    for attempt in range(3):
+        try:
+            response = requests.post(
+                'https://openrouter.ai/api/v1/chat/completions',
+                headers={
+                    'Authorization': f'Bearer {os.getenv("OPENROUTER_API_KEY")}',
+                    'Content-Type': 'application/json'
                 },
-                {'role': 'user', 'content': user_message}
-            ]
-        }
-    )
+                json={
+                    'model': 'openrouter/free',
+                    'max_tokens': 300,
+                    'messages': [
+                        {
+                            'role': 'system',
+                            'content': "You are a friendly assistant on Doan's portfolio website. Doan is a computing student at VJC who knows Python, HTML, CSS, web development, and app design. Answer questions about Doan or general tech questions briefly and helpfully. Keep answers to 3-4 sentences."
+                        },
+                        {'role': 'user', 'content': user_message}
+                    ]
+                },
+                timeout=15
+            )
+            data = response.json()
+            print(data)
+            if 'choices' not in data:
+                raise Exception('No choices in response')
+            return {'reply': data['choices'][0]['message']['content']}
 
-    data = response.json()
-    print(data)
-    if 'choices' not in data:
-        return {'reply': 'I am busy right now, please try again in a moment!'}
-    return {'reply': data['choices'][0]['message']['content']}
+        except Exception as e:
+            print(f'Attempt {attempt + 1} failed: {e}')
+            import time
+            time.sleep(1)
+
+    return {'reply': 'I am busy right now, please try again in a moment!'}
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
