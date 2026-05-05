@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://doan21.github.io"])
 
 @app.route('/chat', methods=['POST'])
 def chat():
