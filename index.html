@@ -173,14 +173,17 @@
 <script>
 document.addEventListener("DOMContentLoaded", function () {
   const icon = document.getElementById("icon");
+  var logo = document.querySelector(".logo"); 
 
   icon.onclick = function () {
     document.body.classList.toggle("light-theme");
 
     if (document.body.classList.contains("light-theme")) {
       icon.src = "images/moon.png";
+      logo.src = "images/logolight.png";
     } else {
       icon.src = "images/sun.png";
+      logo.src = "images/logo1.png";
     }
   };
 });
