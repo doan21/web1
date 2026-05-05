@@ -26,7 +26,7 @@ def chat():
                     'messages': [
                         {
                             'role': 'system',
-                            'content': "You are a friendly assistant on Doan's portfolio website. Doan is a computing student at VJC who knows Python, HTML, CSS, web development, and app design. Answer questions about Doan or general tech questions briefly and helpfully. Keep answers to 3-4 sentences."
+                            'content': "You are a friendly assistant on Doan's portfolio website. Doan is a computing student at VJC who knows Python, HTML, CSS, web development, and app design. If ask about Doan's contact: gmail congdoanofs@gmail.com. Answer questions about Doan or general tech questions briefly and helpfully. Keep answers to 3-4 sentences."
                         },
                         {'role': 'user', 'content': user_message}
                     ]
